@@ -1,0 +1,40 @@
+// @see https://www.electron.build/configuration/configuration
+{
+  appId: 'com.ezviz.yuanchengkongzhi',
+  asar: true,
+  productName: '萤石远程控制',
+  directories: {
+    output: 'release/${version}',
+  },
+  files: ['dist', 'dist-electron'],
+  mac: {
+    target: ['dmg'],
+    artifactName: '${productName}-Mac-${version}-Installer.${ext}',
+  },
+  win: {
+    target: [
+      {
+        target: 'nsis',
+        arch: ['x64'],
+      },
+    ],
+    artifactName: '${productName}_${version}.${ext}',
+  },
+  nsis: {
+    oneClick: false,
+    perMachine: false,
+    allowToChangeInstallationDirectory: true,
+    deleteAppDataOnUninstall: true,
+    allowElevation: true,
+    installerIcon: 'resource/icon.ico',
+    uninstallerIcon: 'resource/icon.ico', // 卸载程序图标的路径
+    installerHeaderIcon: 'resource/icon.ico',
+    createDesktopShortcut: true,
+    createStartMenuShortcut: true,
+    license: 'LICENSE',
+  },
+  linux: {
+    target: ['AppImage'],
+    artifactName: '${productName}-Linux-${version}.${ext}',
+  },
+}

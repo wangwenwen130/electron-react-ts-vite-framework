@@ -5,8 +5,9 @@ import os from 'node:os'
 import path from 'node:path'
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+import 'ele/services'
+import { MAIN_WIN_DIST, VITE_DEV_SERVER_URL } from 'ele/config'
 
-import { MAIN_WIN_DIST, VITE_DEV_SERVER_URL } from '../path/index'
 // The built directory structure
 //
 // ├─┬ dist-electron
@@ -57,7 +58,13 @@ async function createWindow() {
   } else {
     win.loadFile(indexHtml)
   }
-  console.log('getNativeWindowHandle', win.getNativeWindowHandle())
+  const hbuf = win.getNativeWindowHandle()
+  if (os.endianness() === 'LE') {
+    console.log(hbuf.readInt32LE())
+  } else {
+    console.log(hbuf.readInt32BE())
+  }
+  
   // Test actively push message to the Electron-Renderer
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', new Date().toLocaleString())

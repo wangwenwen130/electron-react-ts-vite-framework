@@ -5,6 +5,13 @@ import react from '@vitejs/plugin-react'
 import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
 
+const alias = {
+  '@': path.join(__dirname, 'entry'),
+  main: path.join(__dirname, 'entry/main'),
+  ele: path.join(__dirname, 'electron'),
+  '~': __dirname,
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(async ({ command }) => {
   fs.rmSync('dist-electron', { recursive: true, force: true })
@@ -14,13 +21,7 @@ export default defineConfig(async ({ command }) => {
   const sourcemap = isServe || !!process.env.VSCODE_DEBUG
 
   return {
-    resolve: {
-      alias: {
-        '@': path.join(__dirname, 'entry'),
-        main: path.join(__dirname, 'entry/main'),
-        '~': __dirname,
-      },
-    },
+    resolve: {alias},
     build: {
       sourcemap,
       minify: isBuild,
@@ -31,7 +32,6 @@ export default defineConfig(async ({ command }) => {
         },
         output: {
           dir: 'dist',
-          entryFileNames: `[name]/index.js`, // 输出 JS 到 `[name]/index.js`
           assetFileNames: `[name]/index.[ext]`,
           manualChunks(id) {
             if (id.includes('node_modules')) {
@@ -43,7 +43,7 @@ export default defineConfig(async ({ command }) => {
     },
     plugins: [
       react(),
-      await import('unocss/vite').then(m => m.default()),
+      await import('unocss/vite').then((m) => m.default()),
       electron({
         main: {
           // Shortcut of `build.lib.entry`
@@ -57,6 +57,7 @@ export default defineConfig(async ({ command }) => {
             }
           },
           vite: {
+            resolve: {alias},
             build: {
               sourcemap,
               minify: isBuild,
@@ -72,6 +73,7 @@ export default defineConfig(async ({ command }) => {
           // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
           input: 'electron/preload/index.ts',
           vite: {
+            resolve: {alias},
             build: {
               sourcemap: sourcemap ? 'inline' : undefined, // #332
               minify: isBuild,
@@ -86,18 +88,7 @@ export default defineConfig(async ({ command }) => {
         // If you want use Node.js in Renderer process, the `nodeIntegration` needs to be enabled in the Main process.
         // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
         renderer: {},
-      }),
-      // createStyleImportPlugin({
-      //   libs: [
-      //     {
-      //       libraryName: 'antd',
-      //       esModule: true,
-      //       resolveStyle: (name) => {
-      //         return `antd/es/${name}/style/index`;
-      //       },
-      //     },
-      //   ],
-      // }),
+      })
     ],
     server:
       process.env.VSCODE_DEBUG &&

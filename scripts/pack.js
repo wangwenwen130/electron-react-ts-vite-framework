@@ -44,14 +44,14 @@ const sign = async (filePath) => {
   return await new Promise((resolve, reject) => {
     const params = [
       '-F',
-      'auth_id=xxxxxxxxxxxxxxxxxx',  // 签名的权限
+      'auth_id=09d0d7bb-7e2f-7b1f-1619-a706d09b017a',
       '-F',
       'fd=SHA256',
       '-F',
       'file=@' + filePath,
       '-F',
       'cert_type=SHA256',
-      'http://10.1.13.230/sign/sign.php', // 签名的链接
+      'http://10.1.13.230/sign/sign.php',
       '-k',
       '-f',
       '-o',

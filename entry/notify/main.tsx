@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom'
 // import router from './router'
 // import store from './store'
 import { Provider } from 'react-redux'
+import '@/service/logger';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   // <Provider store={store}>

@@ -10,8 +10,6 @@ import zhCN from 'antd/locale/zh_CN'
 import 'dayjs/locale/zh-cn'
 import '@/service/logger';
 
-console.error('run error');
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ConfigProvider locale={zhCN}>
     <Provider store={store}>

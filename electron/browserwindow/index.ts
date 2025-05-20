@@ -26,16 +26,11 @@ class WindowManager {
     const win = new Base({
       ...options,
       ...winMap[name],
-      registEvents: [
-        {
-          type: 'once',
-          channel: 'closed',
-          callback: () => {
-            console.log(`窗口 ${name} 关闭`)
-            this.winMap.delete(name)
-          },
-        },
-      ],
+    })
+
+    win.on('closed', () => {
+      console.log(`窗口 ${name} 销毁`)
+      this.winMap.delete(name)
     })
 
     this.winMap.set(name, win)
@@ -49,13 +44,13 @@ class WindowManager {
 
   closeWin(name: keyof typeof winMap) {
     const win = this.winMap.get(name)
-    win?.close()
+    !win.isDestroyed && win?.close()
     this.winMap.delete(name)
   }
 
   closeAllWin() {
     this.winMap.forEach((win) => {
-      win.close()
+      !win.isDestroyed && win.close()
     })
     this.winMap.clear()
   }

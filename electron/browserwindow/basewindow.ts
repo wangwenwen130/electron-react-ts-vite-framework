@@ -12,18 +12,18 @@ interface RegisterEvent<K extends keyof IpcMain = keyof IpcMain> {
 
 export type ConstrOptions<K extends keyof IpcMain = keyof IpcMain> = Electron.BrowserWindowConstructorOptions & {
   loadUrl: string
-  registEvents?: RegisterEvent<K>[]
+  registIpcEvents?: RegisterEvent<K>[]
 }
 
 class BaseWindow<K extends keyof IpcMain = keyof IpcMain> extends BrowserWindow {
   win: BrowserWindow
   isRenderReady = false
   constructor(options: ConstrOptions<K>) {
-    const { loadUrl, registEvents, ...opt } = options
+    const { loadUrl, registIpcEvents, ...opt } = options
     super(opt)
     this.win = this
     this.load(loadUrl)
-    registEvents && this.registerEvent(registEvents)
+    registIpcEvents && this.registerIpcEvent(registIpcEvents)
     this.openDevTools()
   }
 
@@ -40,7 +40,7 @@ class BaseWindow<K extends keyof IpcMain = keyof IpcMain> extends BrowserWindow 
     })
   }
 
-  registerEvent<k extends keyof IpcMain>(events?: RegisterEvent<k>[]) {
+  registerIpcEvent<k extends keyof IpcMain>(events?: RegisterEvent<k>[]) {
     this.webContents.ipc.once('ipc-message', (event, channel, ...arg) => {
       if (channel === ipcReady) {
         this.isRenderReady = true

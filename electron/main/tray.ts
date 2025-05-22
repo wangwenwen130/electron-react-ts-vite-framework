@@ -1,6 +1,7 @@
 import { Menu, Tray, app } from 'electron'
 import path from 'node:path'
 import { windowManager } from 'ele/browserwindow'
+import { resourcePath } from 'ele/config'
 
 export let willQuitApp = false
 
@@ -22,7 +23,7 @@ export const createTray = () => {
     },
   ]
 
-  const appTray = new Tray(path.join(__dirname, '../../resource/icon.png'))
+  const appTray = new Tray(path.join(resourcePath, 'icon.png'))
   const contextMenu = Menu.buildFromTemplate(trayMenuTemplate)
   appTray.setToolTip('萤石远程桌面')
   appTray.setContextMenu(contextMenu)

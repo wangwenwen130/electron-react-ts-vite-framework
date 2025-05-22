@@ -63,7 +63,10 @@ export default defineConfig(async ({ command }) => {
               minify: isBuild,
               outDir: 'dist-electron/main',
               rollupOptions: {
-                external: Object.keys('dependencies' in pkg ? pkg.dependencies : {}),
+                external: [
+                  ...Object.keys('dependencies' in pkg ? pkg.dependencies : {}),
+                  'ezdesk.node'
+                ],
               },
             },
           },

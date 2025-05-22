@@ -15,3 +15,6 @@ export const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL
 
 /** public 地址 */
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(ROOT, 'public') : RENDERER_DIST
+
+/** resource 文件夹地址 */
+export const resourcePath = path.join(process.cwd(), 'resource')

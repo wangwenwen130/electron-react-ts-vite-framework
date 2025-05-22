@@ -3,10 +3,11 @@
   appId: 'com.ezviz.yuanchengkongzhi',
   asar: true,
   productName: '萤石远程控制',
+  extraFiles:['resource'],
   directories: {
     output: 'release/${version}',
   },
-  files: ['dist', 'dist-electron', 'resource'],
+  files: ['dist', 'dist-electron'],
   mac: {
     target: ['dmg'],
     artifactName: '${productName}-Mac-${version}-Installer.${ext}',

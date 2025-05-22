@@ -2,24 +2,22 @@ import { BrowserWindow, shell } from 'electron'
 import os from 'node:os'
 import { isDev } from 'ele/config'
 
-export const ipcReady = '__ipc_ready__'
-
 export type ConstrOptions = Electron.BrowserWindowConstructorOptions & {
-  loadUrl: string,
-  createWindow?: (win: BrowserWindow) => void,
+  loadUrl: string
+  handleEvent?: (win: BrowserWindow) => void
 }
 
 class BaseWindow extends BrowserWindow {
   win: BrowserWindow
   isRenderReady = false
   constructor(options: ConstrOptions) {
-    const { loadUrl, createWindow, ...opt } = options
+    const { loadUrl, handleEvent, ...opt } = options
     super(opt)
     this.win = this
     this.load(loadUrl)
     this.openDevTools()
     this.listenIsReady()
-    createWindow && createWindow(this)
+    handleEvent && handleEvent(this)
   }
 
   load(url: string) {
@@ -36,7 +34,7 @@ class BaseWindow extends BrowserWindow {
   }
 
   listenIsReady() {
-    this.webContents.on('dom-ready', () => {
+    this.webContents.once('did-finish-load', () => {
       this.isRenderReady = true
     })
   }

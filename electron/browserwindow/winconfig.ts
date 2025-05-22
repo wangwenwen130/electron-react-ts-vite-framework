@@ -1,5 +1,6 @@
-import { VITE_DEV_SERVER_URL, MAIN_WIN_DIST, NOTIFY_WIN_DIST } from 'ele/config'
+import { VITE_DEV_SERVER_URL, RENDERER_DIST } from 'ele/config'
 import path from 'node:path'
+import type { ConstrOptions } from './basewindow'
 
 const preload = path.join(__dirname, '../preload/index.js')
 
@@ -18,17 +19,34 @@ export const baseConfig: Electron.BrowserWindowConstructorOptions = {
   },
 }
 
+const main: ConstrOptions = {
+  ...baseConfig,
+  loadUrl: getPath('main'),
+  handleEvent: (win) => {
+    const webContents = win.webContents
+    webContents.ipc.on('minimize', () => {
+      win.minimize()
+    })
+    webContents.ipc.on('maximize', () => {
+      win.maximize()
+    })
+    webContents.setWindowOpenHandler(() => {
+      return { action: 'allow' }
+    })
+  },
+}
+
+const notify: ConstrOptions = {
+  ...baseConfig,
+  loadUrl: getPath('notify'),
+}
+
 export const winMap = {
-  main: {
-    ...baseConfig,
-    loadUrl: VITE_DEV_SERVER_URL
-      ? path.join(VITE_DEV_SERVER_URL, 'entry', 'main/')
-      : path.join(MAIN_WIN_DIST, 'index.html'),
-  },
-  notify: {
-    ...baseConfig,
-    loadUrl: VITE_DEV_SERVER_URL
-      ? path.join(VITE_DEV_SERVER_URL, 'entry', 'notify/')
-      : path.join(NOTIFY_WIN_DIST, 'index.html'),
-  },
+  main,
+  notify,
+}
+
+export function getPath(name: string) {
+  if (VITE_DEV_SERVER_URL) return path.join(VITE_DEV_SERVER_URL, 'entry', name, '/')
+  else return path.join(path.join(RENDERER_DIST, name), 'index.html')
 }

@@ -1,0 +1,37 @@
+import { Menu, Tray, app } from 'electron'
+import path from 'node:path'
+import { windowManager } from 'ele/browserwindow'
+
+export let willQuitApp = false
+
+export const createTray = () => {
+  const trayMenuTemplate = [
+    {
+      label: '显示',
+      click: () => {
+        windowManager.showWin('main')
+      },
+    },
+    {
+      label: '退出',
+      click: () => {
+        console.log('退出')
+        willQuitApp = true
+        app.quit()
+      },
+    },
+  ]
+
+  const appTray = new Tray(path.join(__dirname, '../../resource/icon.png'))
+  const contextMenu = Menu.buildFromTemplate(trayMenuTemplate)
+  appTray.setToolTip('萤石远程桌面')
+  appTray.setContextMenu(contextMenu)
+
+  appTray.on('click', () => {
+    if (windowManager.getWin('main')) windowManager.showWin('main')
+  })
+
+  app.on('window-all-closed', () => {
+    appTray.destroy()
+  })
+}

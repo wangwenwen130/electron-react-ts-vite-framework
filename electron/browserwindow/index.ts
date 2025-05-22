@@ -12,6 +12,11 @@ class WindowManager {
     WindowManager.instance = this
   }
 
+  getWebContents (name: keyof typeof winMap) {
+    const win = this.winMap.get(name)
+    return win?.webContents
+  }
+
   getWin(name: keyof typeof winMap) {
     return this.winMap.get(name)
   }
@@ -38,12 +43,14 @@ class WindowManager {
 
   showWin(name: keyof typeof winMap) {
     const win = this.winMap.get(name)
+    if (!win) return console.error(`showWin 窗口 ${name} 不存在`)
     if (win.isMinimized()) win.restore()
     win.focus()
   }
 
   closeWin(name: keyof typeof winMap) {
     const win = this.winMap.get(name)
+    if (!win) return console.error(`closeWin 窗口 ${name} 不存在`)
     !win.isDestroyed && win?.close()
     this.winMap.delete(name)
   }

@@ -10,11 +10,6 @@ export const RENDERER_PUBLIC = 'dist/entry'
 export const RENDERER_DIST = path.join(ROOT, RENDERER_PUBLIC)
 /** 渲染进程打包资源 总入口地址 */
 
-/** 窗口（html）文件入口地址 */
-export const MAIN_WIN_DIST = path.join(RENDERER_DIST, 'main')
-export const NOTIFY_WIN_DIST = path.join(RENDERER_DIST, 'notify')
-/** 窗口（html）文件入口地址 */
-
 /** 本地开发服务地址 */
 export const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL
 

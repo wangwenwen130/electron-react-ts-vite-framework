@@ -2,7 +2,7 @@ import { ipcRenderer, contextBridge } from 'electron'
 import 'ele/services/store/preload'
 import './load'
 // --------- Expose some API to the Renderer process ---------
-contextBridge.exposeInMainWorld('ipcRenderer', {
+contextBridge.exposeInMainWorld('ipc', {
   on(...args: Parameters<typeof ipcRenderer.on>) {
     const [channel, listener] = args
     return ipcRenderer.on(channel, (event, ...args) => listener(event, ...args))

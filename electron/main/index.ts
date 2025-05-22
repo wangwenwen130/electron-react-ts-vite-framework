@@ -1,15 +1,13 @@
 import { app, BrowserWindow } from 'electron'
 import os from 'node:os'
 import 'ele/services'
-import { windowManager } from 'ele/browserwindow'
-
+import windowManager from 'ele/browserwindow'
+import { createTray } from './tray'
+import { readyCheck } from './protocolawake'
 // import { createRequire } from 'node:module'
 // import { fileURLToPath } from 'node:url'
 // const require = createRequire(import.meta.url)
 // const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-app.removeAsDefaultProtocolClient('ezviz-control')
-app.setAsDefaultProtocolClient('ezviz-control')
 
 // Disable GPU Acceleration for Windows 7
 if (os.release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -23,6 +21,8 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 app.whenReady().then(() => {
+  createTray()
+  readyCheck()
   windowManager.createWin('main')
 })
 

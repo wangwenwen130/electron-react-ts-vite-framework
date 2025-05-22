@@ -42,8 +42,8 @@ export default defineConfig(async ({ command }) => {
       },
     },
     plugins: [
-      react(),
       await import('unocss/vite').then((m) => m.default()),
+      react(),
       electron({
         main: {
           // Shortcut of `build.lib.entry`

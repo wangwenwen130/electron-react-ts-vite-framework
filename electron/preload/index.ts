@@ -19,4 +19,7 @@ contextBridge.exposeInMainWorld('ipc', {
     const [channel, ...omit] = args
     return ipcRenderer.invoke(channel, ...omit)
   },
+  broadcast(...args: Parameters<typeof ipcRenderer.broadcast>) {
+    ipcRenderer.send('__broadcast__', ...args)
+  },
 })

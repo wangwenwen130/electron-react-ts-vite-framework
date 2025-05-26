@@ -50,7 +50,8 @@ class BaseWindow extends BrowserWindow {
   }
 
   openDevTools(options: Electron.OpenDevToolsOptions = { mode: 'right' }) {
-    isDev && this.webContents.openDevTools(options)
+    // isDev && this.webContents.openDevTools(options)
+    this.webContents.openDevTools(options)
   }
 }
 

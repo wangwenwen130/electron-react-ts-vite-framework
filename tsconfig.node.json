@@ -12,5 +12,5 @@
       "ele/*": ["electron/*"],
     }
   },
-  "include": ["vite.config.ts", "package.json", "electron"]
+  "include": ["vite.config.ts", "package.json", "electron", "entry/types/**/*.d.ts"]
 }

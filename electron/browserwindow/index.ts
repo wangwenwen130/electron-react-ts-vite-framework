@@ -1,5 +1,7 @@
 import { winMap } from './winconfig'
 import Base, { type ConstrOptions } from './basewindow'
+export * from './winconfig'
+export * from './basewindow'
 
 class WindowManager {
   static instance: WindowManager
@@ -12,19 +14,35 @@ class WindowManager {
     WindowManager.instance = this
   }
 
-  getWebContents (name: keyof typeof winMap) {
+  getWebContents(name: keyof typeof winMap) {
     const win = this.winMap.get(name)
     return win?.webContents
   }
 
-  getWin(name: keyof typeof winMap) {
+  get(name: keyof typeof winMap) {
     return this.winMap.get(name)
   }
 
-  createWin(name: keyof typeof winMap, options: Partial<ConstrOptions> = {}) {
+  filter(cb: (win: Electron.BrowserWindow, name: keyof typeof winMap) => boolean) {
+    const filterArr: Electron.BrowserWindow[] = []
+    this.winMap.forEach((win, name) => {
+      if (cb(win, name)) {
+        filterArr.push(win)
+      }
+    })
+    return filterArr
+  }
+
+  for(cb: (win: Electron.BrowserWindow, name: keyof typeof winMap) => void) {
+    this.winMap.forEach((win, name) => {
+      cb(win, name)
+    })
+  }
+
+  create(name: keyof typeof winMap, options: Partial<ConstrOptions> = {}) {
     if (this.winMap.has(name)) {
       /** 展示窗口 */
-      this.showWin(name)
+      this.show(name)
       return this.winMap.get(name)
     }
 
@@ -41,21 +59,21 @@ class WindowManager {
     this.winMap.set(name, win)
   }
 
-  showWin(name: keyof typeof winMap) {
+  show(name: keyof typeof winMap) {
     const win = this.winMap.get(name)
     if (!win) return console.error(`showWin 窗口 ${name} 不存在`)
     if (win.isMinimized()) win.restore()
     win.focus()
   }
 
-  closeWin(name: keyof typeof winMap) {
+  close(name: keyof typeof winMap) {
     const win = this.winMap.get(name)
     if (!win) return console.error(`closeWin 窗口 ${name} 不存在`)
     !win.isDestroyed && win?.close()
     this.winMap.delete(name)
   }
 
-  closeAllWin() {
+  closeAll() {
     this.winMap.forEach((win) => {
       !win.isDestroyed && win.close()
     })

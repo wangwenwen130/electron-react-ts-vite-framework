@@ -4,7 +4,8 @@ import 'ele/services'
 import windowManager from 'ele/browserwindow'
 import { createTray } from './tray'
 import { readyCheck } from './protocolawake'
-import 'ele/ezdesk';
+import { initMainIPC } from 'ele/ipc'
+import 'ele/ezdesk'
 
 // Disable GPU Acceleration for Windows 7
 if (os.release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -18,18 +19,20 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 app.whenReady().then(() => {
+  /** 优先注册ipc事件 */
+  initMainIPC()
   createTray()
   readyCheck()
-  windowManager.createWin('main')
+  windowManager.create('main')
 })
 
 app.on('window-all-closed', () => {
-  windowManager.closeAllWin()
+  windowManager.closeAll()
   if (process.platform !== 'darwin') app.quit()
 })
 
 app.on('second-instance', () => {
-  windowManager.showWin('main')
+  windowManager.show('main')
 })
 
 app.on('activate', () => {
@@ -37,6 +40,6 @@ app.on('activate', () => {
   if (allWindows.length) {
     allWindows[0].focus()
   } else {
-    windowManager.createWin('main')
+    windowManager.create('main')
   }
 })

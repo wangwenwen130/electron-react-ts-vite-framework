@@ -36,15 +36,17 @@ const main: ConstrOptions = {
   },
 }
 
-const notify: ConstrOptions = {
+const control: ConstrOptions = {
   ...baseConfig,
-  loadUrl: getPath('notify'),
+  loadUrl: getPath('control'),
 }
 
 export const winMap = {
   main,
-  notify,
+  control,
 }
+
+export type WinMap = keyof typeof winMap
 
 export function getPath(name: string) {
   if (VITE_DEV_SERVER_URL) return path.join(VITE_DEV_SERVER_URL, 'entry', name, '/')

@@ -10,7 +10,7 @@ export const createTray = () => {
     {
       label: '显示',
       click: () => {
-        windowManager.showWin('main')
+        windowManager.show('main')
       },
     },
     {
@@ -29,7 +29,7 @@ export const createTray = () => {
   appTray.setContextMenu(contextMenu)
 
   appTray.on('click', () => {
-    if (windowManager.getWin('main')) windowManager.showWin('main')
+    if (windowManager.get('main')) windowManager.show('main')
   })
 
   app.on('window-all-closed', () => {

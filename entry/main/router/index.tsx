@@ -33,6 +33,10 @@ export const router = createHashRouter([
       },
     ],
   },
+  {
+    path: '/notify',
+    element: <Setting />,
+  },
 ])
 
 export default router

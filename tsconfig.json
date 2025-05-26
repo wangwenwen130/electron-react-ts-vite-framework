@@ -22,7 +22,7 @@
       "main/*": ["entry/main/*"],
       "ele/*": ["electron/*"],
       "localStore": ["electron/services/store/store"]
-    },
+    }
   },
   "references": [{ "path": "./tsconfig.node.json" }],
   "exclude": ["node_modules/*", "dist-electron", "build"]

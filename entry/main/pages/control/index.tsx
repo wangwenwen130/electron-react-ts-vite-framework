@@ -133,7 +133,7 @@ export default function control() {
         ok={() => setShowTempPasswordModal(false)}
         cancel={() => setShowTempPasswordModal(false)}
       />
-      <IptPWModal visivle={true} ok={() => {}} cancel={() => {}} />
+      {/* <IptPWModal visivle={true} ok={() => {}} cancel={() => {}} /> */}
     </div>
   )
 }

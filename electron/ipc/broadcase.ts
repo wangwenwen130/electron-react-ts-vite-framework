@@ -1,5 +1,5 @@
 import { ipcMain, BrowserWindow } from 'electron'
-import { windowManager, type WinMap } from '~/electron/browser_window'
+import { windowManager, type WinMap } from 'ele/browser_window'
 export const initBroadcast = () => {
   ipcMain.on(
     '__broadcast__',

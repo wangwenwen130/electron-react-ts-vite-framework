@@ -1,5 +1,5 @@
 import { app } from 'electron'
-import { windowManager } from '~/electron/browser_window'
+import { windowManager } from 'ele/browser_window'
 // app.removeAsDefaultProtocolClient('ezviz-control')
 app.setAsDefaultProtocolClient('ezviz-control')
 

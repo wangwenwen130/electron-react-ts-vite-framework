@@ -1,6 +1,6 @@
 import { Menu, Tray, app } from 'electron'
 import path from 'node:path'
-import { windowManager } from '~/electron/browser_window'
+import { windowManager } from 'ele/browser_window'
 import { resourcePath } from 'ele/config'
 
 export let willQuitApp = false

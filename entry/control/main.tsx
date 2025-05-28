@@ -7,7 +7,7 @@ import './i18n'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import 'dayjs/locale/zh-cn'
-import 'main/assets/css/common.css'
+import '@/assets/common.css'
 import 'virtual:uno.css'
 import '@/service'
 

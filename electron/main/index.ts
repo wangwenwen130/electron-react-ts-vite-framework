@@ -1,9 +1,9 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
 import os from 'node:os'
 import 'ele/services'
-import windowManager from 'ele/browserwindow'
+import windowManager from 'ele/browser_window'
 import { createTray } from './tray'
-import { readyCheck } from './protocolawake'
+import { readyCheck } from './protocol_awake'
 import { initMainIPC } from 'ele/ipc'
 import 'ele/ezdesk'
 
@@ -19,6 +19,7 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 app.whenReady().then(() => {
+  Menu.setApplicationMenu(null)
   /** 优先注册ipc事件 */
   initMainIPC()
   createTray()

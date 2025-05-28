@@ -1,6 +1,6 @@
 import { defineConfig, transformerVariantGroup } from 'unocss'
 import presetRemToPx from '@unocss/preset-rem-to-px'
-import presetWind3 from '@unocss/preset-wind3';
+import presetWind3 from '@unocss/preset-wind3'
 
 export default defineConfig({
   shortcuts: {
@@ -8,6 +8,8 @@ export default defineConfig({
     'flex-c-c': 'flex justify-center items-center',
     'flex-col': 'flex flex-col',
     'flex-col-c-c': 'flex flex-col justify-center items-center',
+    'input-bg':
+      'bg-#ECEBEB focus:bg-#ECEBEB hover:bg-#ECEBEB hover:border-#ECEBEB focus:border-#ECEBEB focus-within:border-#ECEBEB',
   },
   presets: [
     /** UnoCss 默认预设 */

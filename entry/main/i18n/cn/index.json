@@ -1,3 +1,79 @@
 {
-  "sys": "系统"
+  "login": {
+    "not_login": "未登录",
+    "register": "注册账号",
+    "login_now": "立即登录"
+  },
+  "remote_control": {
+    "name": "远程控制",
+    "login_modal": {
+      "title": "登录账号以进行远程控制",
+      "context": "设备需要登录账号后才能进行远程控制，是否现在登录？没有账号请点击立即注册"
+    },
+    "ipt_pw_modal": {
+      "title": "输入被控设备密码",
+      "req_ctl": "免密连接",
+      "use_pw_ctl": "立即连接"
+    },
+    "contron_placeholder": "请输入控制码",
+    "invite_control": "邀请他人控制此设备",
+    "invite_control_tip": "邀请他人控制此设备，需开启临时密码访问,请确定是否继续？",
+    "open_control_modal": {
+      "agree": "同意开启",
+      "disagree": "暂不开启",
+      "title": "开启受控模式确认",
+      "content": {
+        "desc": "同意开启受控模式意味着您将授权以下权限：",
+        "device": {
+          "title": "☆设备操作权限",
+          "desc": "控制者有权操作您的设备，修改应用信息"
+        },
+        "file": {
+          "title": "☆文件操作权限",
+          "desc": "控制者有权对目录文件进行增删改查"
+        },
+        "privacy": {
+          "title": "☆查看隐私内容",
+          "desc": "控制者可查看图片、视频等隐私文件内容"
+        }
+      }
+    }
+  },
+  "device": {
+    "name": "设备",
+    "device_code": "设备码",
+    "copy_success": "设备码已复制",
+    "temp_password": "临时密码",
+    "safe_password": "安全密码",
+    "pw_modal": {
+      "err_tip": "由6~8位，数字/大写字母/小写字母/符号2种及以上组成",
+      "update_options": {
+        "every_day": "每天自动更新",
+        "duiring_12": "每12小时自动更新",
+        "duiring_1": "每1小时自动更新",
+        "every_control": "每次远控后自动更新",
+        "by_self": "手动设置（不自动更新）"
+      }
+    }
+  },
+  "control_record": {
+    "name": "控制记录",
+    "no_record": "暂无被控记录"
+  },
+  "setting": {
+    "name": "设置"
+  },
+  "common": {
+    "copy": "复制",
+    "show": "显示",
+    "hide": "隐藏",
+    "view": "查看",
+    "cancel": "取消",
+    "confirm": "确定",
+    "close": "关闭",
+    "refrash": "刷新",
+    "modify": "修改",
+    "complete": "完成",
+    "edite": "编辑"
+  }
 }

@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
-import { Button } from 'antd'
-import { useTranslation } from 'react-i18next'
+import { Outlet } from 'react-router-dom'
+import { useBroadcast } from 'main/hooks'
+import { useEffect } from 'react'
 
 export default function Home() {
-  const [count, setCount] = useState(0)
-  const { t } = useTranslation()
+    
+  useEffect(() => {
+    useBroadcast('control')
+    console.log('🚀 ~ broadcast init ~ chennel: main')
+  }, [])
 
   return (
-    <>
-      <div>{count}</div>
-      <Button className="color-red w-200px bg-blue" onClick={() => setCount(count + 1)}>
-        点击++{t('sys')}
-      </Button>
-    </>
+    <div className="wh-full">
+      <Outlet />
+    </div>
   )
 }

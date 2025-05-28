@@ -28,7 +28,7 @@ export default defineConfig(async ({ command }) => {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'entry/main/index.html'),
-          notify: path.resolve(__dirname, 'entry/notify/index.html'),
+          control: path.resolve(__dirname, 'entry/control/index.html'),
         },
         output: {
           dir: 'dist',

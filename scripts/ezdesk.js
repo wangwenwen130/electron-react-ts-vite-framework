@@ -2,7 +2,7 @@ const { rebuild } = require('@electron/rebuild')
 const path = require('path')
 const fs = require('fs-extra')
 
-const buildPath = path.join(__dirname, '../ezdesk-api') // 根据实际路径调整
+const buildPath = path.join(__dirname, '../ezdesk_api') // 根据实际路径调整
 const ezdeskApiPath = path.join(buildPath, 'build/Release/ezdesk.node')
 const ezdeskDllPath = path.join(buildPath, 'ezdesk_api.dll')
 const targetPath = path.join(__dirname, '../resource')

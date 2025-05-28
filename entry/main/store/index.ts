@@ -1,12 +1,11 @@
-import {
-  configureStore,
-  combineReducers,
-  type ThunkAction,
-  type Action,
-} from '@reduxjs/toolkit'
-import eampleReducer  from './slices/eample';
-import {useDispatch, useSelector} from 'react-redux';
+import { configureStore, combineReducers, type ThunkAction, type Action } from '@reduxjs/toolkit'
 
+import secretKey from './slices/secret_key'
+export * from './slices/secret_key'
+import user from './slices/user'
+export * from './slices/user'
+
+import { useDispatch, useSelector } from 'react-redux'
 
 export const STATUS = {
   LOADING: 'LOADING',
@@ -21,18 +20,14 @@ export type FetchResult<T> = {
 
 export const store = configureStore({
   reducer: combineReducers({
-    eample: eampleReducer
-  })
+    secretKey,
+    user,
+  }),
 })
 
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()

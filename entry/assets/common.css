@@ -1,0 +1,68 @@
+html {
+  /* 方便unocss计算：1单位 = 0.25rem = 1px */
+  font-size: 4px;
+}
+body {
+  font-size: 16px;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+.div {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* 容器基础样式 */
+.scroll_wrap {
+  overflow-y: overlay;
+  overflow-x: overlay;
+  /* 其他样式（如宽高） */
+}
+
+/* 隐藏滚动条（默认状态） */
+.scroll_wrap::-webkit-scrollbar {
+  width: 0; /* 滚动条宽度设为 0 */
+  transition: width 0.3s; /* 平滑过渡效果 */
+}
+
+/* 悬停时显示滚动条 */
+.scroll_wrap:hover::-webkit-scrollbar {
+  width: 8px; /* 滚动条宽度 */
+}
+
+/* 滚动条轨道样式 */
+.scroll_wrap::-webkit-scrollbar-track {
+  background: transparent; /* 轨道背景透明 */
+  border-radius: 10px; /* 圆角轨道 */
+}
+
+/* 滚动条滑块样式（默认） */
+.scroll_wrap::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2); /* 滑块颜色 */
+  border-radius: 10px; /* 圆角滑块 */
+}
+
+/* 滑块悬停样式（可选） */
+.scroll_wrap:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4); /* 悬停时颜色加深 */
+}
+
+.scroll_wrap {
+  scrollbar-width: none; /* 隐藏滚动条 */
+}
+
+.scroll_wrap:hover {
+  scrollbar-width: auto; /* 悬停显示 */
+}
